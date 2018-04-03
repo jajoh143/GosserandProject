@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using GosserandProject.Data;
 using GosserandProject.Models;
 using GosserandProject.Services;
-using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace GosserandProject
 {
@@ -48,9 +47,6 @@ namespace GosserandProject
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-
-                var options = new WebpackDevMiddlewareOptions() { HotModuleReplacement = true };
-                app.UseWebpackDevMiddleware(options);
             }
             else
             {
@@ -66,10 +62,6 @@ namespace GosserandProject
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }
