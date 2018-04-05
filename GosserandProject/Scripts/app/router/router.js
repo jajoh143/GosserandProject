@@ -4,15 +4,19 @@ import Login from '../login/Login.vue'
 
 Vue.use(Router)
 
-const routes = [
-    {
-        path: '', redirect: '/'
-    },
-    {
-        path: '/login', component: Login
-    },
-    {
-        path: '/admin',
-        component: AdminLayout
-    }
-]
+export default new Router({
+    routes: [
+        {
+            path: '', redirect: '/'
+        },
+        {
+            path: '/', component: Layout,
+            children: [
+                {
+                    path: "login", component: Login
+                },
+               
+            ]
+        }
+    ]
+})

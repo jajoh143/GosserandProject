@@ -7,7 +7,6 @@ const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin")
 module.exports = {
     entry: {
         app_index: './Scripts/app/index.js',
-        layout: './Scripts/app/layout/index.js',
         shared: ["babel-polyfill", "vue", "vue-router"]
     },
     output: {
