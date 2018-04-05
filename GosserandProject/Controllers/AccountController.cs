@@ -17,7 +17,6 @@ using GosserandProject.Services;
 namespace GosserandProject.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -40,7 +39,10 @@ namespace GosserandProject.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
+
+        //Simplifies the process of accessing the Backend
         [HttpGet]
+        [Route("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
