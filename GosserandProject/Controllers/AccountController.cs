@@ -54,6 +54,7 @@ namespace GosserandProject.Controllers
         }
 
         [HttpPost]
+        [Route("login")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -457,7 +458,7 @@ namespace GosserandProject.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(AdminController.Index), "Admin");
             }
         }
 
