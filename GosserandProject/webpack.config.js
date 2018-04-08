@@ -6,13 +6,11 @@ const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin")
 
 module.exports = {
     entry: {
-        app_index: './Scripts/app/index.js',
-        layout: './Scripts/app/layout/index.js',
-        shared: ["babel-polyfill", "vue", "vue-router"]
+        shared: ["./Scripts/app/index.js", "babel-polyfill", "vue", "vue-router"]
     },
     output: {
         filename: '[name].js',
-        path: __dirname + "/Scripts/bundle"
+        path: __dirname + "/wwwroot/js"
     },
     resolve: {
         alias: {

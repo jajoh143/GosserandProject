@@ -34,8 +34,9 @@ namespace GosserandProject
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
 
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddSingleton(Configuration);
             services.AddMvc();
         }
 

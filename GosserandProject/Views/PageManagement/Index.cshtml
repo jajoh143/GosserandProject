@@ -1,0 +1,78 @@
+﻿@model GosserandProject.Web.Models.Page.PageManagementViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="app">
+    <div class="mdl-container">
+        <div class="mdl-layout">
+            <table class="mdl-data-table mdl-js-data-table">
+                <thead>
+                    <tr>
+                        <th v-for="(column, index) in columns"
+                            :key="index"
+                            :class="{'mdl-data-table__cell--non_numeric' : isString(column)}">
+                            {{ column.title}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr v-for="(row, index) in items">
+                       <td v-for="(column, index) in columns">
+                           {{ row[column.field]}}
+                       </td>
+                   </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            new Vue({
+                el: '#app',
+                data: {
+                    test: "Hello World!",
+                    columns: [
+                        { title: 'Page Title', field: 'PageTitle', type: 'string' },
+                        { title: 'Page Description', field: 'PageDecription', type: 'string' },
+                        { title: 'Author Username', field: 'AuthorUsername', type: 'string' }
+                    ],
+                    items: [
+                        
+                    ]
+
+                },
+                computed: {
+
+
+                },
+                methods: {
+                    isString(val) {
+                        return typeof (val) == 'string';
+                    },
+                    getRowData() {
+                        axios.get("/api/pagemanagement/getpages").then(resp => {
+
+                            console.log(resp);
+                            if (resp.status == 200)
+                                this.items = resp.data;
+
+                        });
+
+                    }
+                },
+                mounted() {
+
+
+                }
+
+            });
+        });
+        
+    </script>
+}

@@ -1,8 +1,6 @@
-﻿import Vue from 'vue'
+﻿import Vue from 'vue/dist/vue.js'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuetify)
 
-const app = new Vue({
-    
-}).$mount("#app")
+window.Vue = Vue;
