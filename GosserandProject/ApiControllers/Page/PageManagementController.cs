@@ -23,7 +23,7 @@ namespace GosserandProject.Api.Controllers.Page
 
         public async Task<IActionResult> GetPages()
         {
-            return Ok(await GetPageManagementData.GetPages(_configuration.GetConnectionString("DefaultConnection")));
+            return Ok(await GetPageManagementData.GetPagesData(_configuration.GetConnectionString("DefaultConnection")));
         }
 
             // GET: api/<controller>
