@@ -10,8 +10,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace GosserandProject.Api.Controllers.Page
 {
-   
-    [Route("api/[controller]")]
     public class PageManagementController : Controller
     {
         private IConfiguration _configuration;
@@ -21,16 +19,10 @@ namespace GosserandProject.Api.Controllers.Page
             _configuration = configuration;
         }
 
+        [HttpGet]
         public async Task<IActionResult> GetPages()
         {
             return Ok(await GetPageManagementData.GetPagesData(_configuration.GetConnectionString("DefaultConnection")));
-        }
-
-            // GET: api/<controller>
-            [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
         }
     }
 }

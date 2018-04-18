@@ -30,13 +30,16 @@
     "vue-router": "^3.0.1",
     "vue-select": "^2.4.0",
     "vue-template-compiler": "^2.5.13",
+    "vuepress": "^0.5.1",
     "vuetable-2": "^1.7.5",
     "webpack": "^3.11.0",
     "webpack-bundle-analyzer": "^2.11.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "wbp": "webpack --watch"
+    "wbp": "webpack --watch",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs" 
   },
   "keywords": [],
   "author": "",
