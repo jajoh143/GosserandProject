@@ -60,6 +60,11 @@ namespace GosserandProject
 
             app.UseMvc(routes =>
             {
+
+                routes.MapRoute(
+                    name: "api",
+                    template: "api/{controller}/{action}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=FrontEnd}/{action=Index}/{id?}");

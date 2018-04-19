@@ -20,9 +20,9 @@ namespace GosserandProject.Api.Controllers.Page
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPages()
+        public IActionResult GetPages()
         {
-            return Ok(await GetPageManagementData.GetPagesData(_configuration.GetConnectionString("DefaultConnection")));
+            return Ok(GetPageManagementData.GetPagesData(_configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }

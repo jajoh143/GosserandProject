@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using GosserandProject.Data.DTO.Admin;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,24 +13,26 @@ namespace GossserandProject.Data.Queries.Page
 {
     public class GetPageManagementData
     {
-        public static async Task<IEnumerable<PageDTO>> GetPagesData(string connectionString)
+        
+        public static IEnumerable<PageDTO> GetPagesData(string connString)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            using (IDbConnection db = new SqlConnection(connString))
             {
                 var query = @"
-                        select 
+                          select 
+						p.Id,
                         PageTitle,
                         PageDescription,
                         PageLink,
                         PagePublished,
-                        IsIndex
-                        u.Username as AuthorUsername
+                        IsIndex,
+                        u.Username as AuthorUsername,
+						p.ModifiedDate
                         from pages p
-                        inner join AspNetUsers u on p.AuthorId = u.ID
-                ";
+                        inner join AspNetUsers u on p.AuthorId = u.ID";
                 try
                 {
-                    return await db.QueryAsync<PageDTO>(query);
+                    return db.Query<PageDTO>(query);
                 }
                 catch (Exception e)
                 {

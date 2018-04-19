@@ -11,19 +11,28 @@
             <table class="mdl-data-table mdl-js-data-table">
                 <thead>
                     <tr>
-                        <th v-for="(column, index) in columns"
-                            :key="index"
-                            :class="{'mdl-data-table__cell--non_numeric' : isString(column)}">
-                            {{ column.title}}
-                        </th>
+                        <td>Page Title</td>
+                        <td>Page Description</td>
+                        <td>Author</td>
+                        <td>Page Modified</td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
-                   <tr v-for="(row, index) in items">
-                       <td v-for="(column, index) in columns">
-                           {{ row[column.field]}}
-                       </td>
-                   </tr>
+                    @foreach(var pageDetail in Model.Pages)
+                    {
+                        <tr>
+                            <td>
+                                @pageDetail.PageTitle
+                            </td>
+                            <td>
+                                @pageDetail.PageDescription
+                            </td>
+                            <td>
+                                @pageDetail.AutherUsername
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -38,9 +47,10 @@
                 data: {
                     test: "Hello World!",
                     columns: [
-                        { title: 'Page Title', field: 'PageTitle', type: 'string' },
-                        { title: 'Page Description', field: 'PageDecription', type: 'string' },
-                        { title: 'Author Username', field: 'AuthorUsername', type: 'string' }
+                        { title: 'Page Title', field: 'pageTitle', type: 'string' },
+                        { title: 'Page Description', field: 'pageDescription', type: 'string' },
+                        { title: 'Author Username', field: 'authorUsername', type: 'string' },
+                        { title: 'Page Last Modified', field: 'modifiedDate', type: 'string'}
                     ],
                     items: [
                         
