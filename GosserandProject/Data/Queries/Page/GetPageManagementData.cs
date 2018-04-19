@@ -41,5 +41,37 @@ namespace GossserandProject.Data.Queries.Page
 
             }
         }
+
+        public static PageDetailDTO GetPageDetail(string connString)
+        {
+            using (IDbConnection db = new SqlConnection(connString))
+            {
+                var query = @"
+                        select 
+                            p.PageTitle,
+                            p.PageDescription,
+                            p.PageLink,
+                            p.PagePublished,
+                            pd.PageBodyHtml,
+                            pd.PageHeadStyle,
+                            anu.UserName AuthorUsername,
+                            anu.FirstName AuthorFirstName,
+                            anu.LastName AuthorLastName
+                        from pages p
+                        left outer join AspNetUsers anu on p.AuthorID = anu.ID
+                        left outer join page_display pd on p.id = pd.PageId
+                        where p.Id = @PageId";
+
+                 try
+                {
+                    return db.QueryFirstOrDefault<PageDetailDTO>(query);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+        }
     }
 }

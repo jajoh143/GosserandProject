@@ -7,6 +7,8 @@ namespace GosserandProject.Data.DTO.Admin
     public class PageDTO
     {
         public string PageTitle { get; set; }
+        public string PageLink { get; set; }
+        public bool PagePublished { get; set; }
         public string PageDescription { get; set; }
         public string AuthorFirstName { get; set; }
         public string AuthorLastName { get; set; }

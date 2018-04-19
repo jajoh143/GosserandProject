@@ -23,5 +23,11 @@ namespace GosserandProject.Web.Controllers
             var model = new PageManagementViewModel(_configuration.GetConnectionString("DefaultConnection"));
             return View(model);
         }
+
+        public IActionResult EditPage(int PageId)
+        {
+            var model = new PageManagementDetailViewModel(_configuration.GetConnectionString("DefaultConnection"));
+            return View(model);
+        }
     }
 }
