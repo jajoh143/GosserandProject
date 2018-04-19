@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GosserandProject.ViewModels.Admin.Page
+namespace GosserandProject.Models.ViewModels.Admin.PageManagement
 {
     public class PageManagementDetailViewModel
     {

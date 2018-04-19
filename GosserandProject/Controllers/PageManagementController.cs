@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GosserandProject.ViewModels.Admin.Page;
-using GosserandProject.Web.Models.Page;
+using GosserandProject.Data.Commands;
+using GosserandProject.Data.DTO.Admin;
+using GosserandProject.Models.ViewModels.Admin.PageManagement;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -36,12 +37,19 @@ namespace GosserandProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                ModifyPageData.UpdatePage(_configuration.GetConnectionString("DefaultConnection"), model.Page);
+                return View(model);
             }
             else
             {
                 return View(model);
             }
+        }
+
+        public IActionResult Create()
+        {
+            var model = new PageManagementCreateViewModel();
+            return View(model);
         }
     }
 }
