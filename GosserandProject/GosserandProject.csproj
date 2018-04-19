@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Commands\" />
     <Folder Include="Scripts\bundle\" />
     <Folder Include="Scripts\vendor\" />
     <Folder Include="src\components\" />

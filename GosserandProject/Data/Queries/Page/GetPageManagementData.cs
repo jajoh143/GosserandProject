@@ -20,7 +20,7 @@ namespace GossserandProject.Data.Queries.Page
             {
                 var query = @"
                           select 
-						p.Id,
+						p.Id PageId,
                         PageTitle,
                         PageDescription,
                         PageLink,
@@ -42,7 +42,7 @@ namespace GossserandProject.Data.Queries.Page
             }
         }
 
-        public static PageDetailDTO GetPageDetail(string connString)
+        public static PageDetailDTO GetPageDetail(string connString, int id)
         {
             using (IDbConnection db = new SqlConnection(connString))
             {
@@ -64,7 +64,10 @@ namespace GossserandProject.Data.Queries.Page
 
                  try
                 {
-                    return db.QueryFirstOrDefault<PageDetailDTO>(query);
+                    return db.QueryFirstOrDefault<PageDetailDTO>(query, new
+                    {
+                        PageId = id
+                    });
                 }
                 catch (Exception e)
                 {

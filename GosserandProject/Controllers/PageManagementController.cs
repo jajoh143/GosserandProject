@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GosserandProject.ViewModels.Admin.Page;
 using GosserandProject.Web.Models.Page;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -24,10 +25,23 @@ namespace GosserandProject.Web.Controllers
             return View(model);
         }
 
-        public IActionResult EditPage(int PageId)
+        public IActionResult Detail(int Id)
         {
-            var model = new PageManagementDetailViewModel(_configuration.GetConnectionString("DefaultConnection"));
+            var model = new PageManagementDetailViewModel(_configuration.GetConnectionString("DefaultConnection"), Id);
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Detail([FromForm]PageManagementDetailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            else
+            {
+                return View(model);
+            }
         }
     }
 }

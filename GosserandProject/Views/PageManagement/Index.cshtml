@@ -5,37 +5,41 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div id="app">
-    <div class="mdl-container">
-        <div class="mdl-layout">
-            <table class="mdl-data-table mdl-js-data-table">
-                <thead>
+<div class="mdl-grid" style="max-width:98%;">
+    <div class="mdl-cell mdl-cell--10-col">
+        <table class="mdl-data-table mdl-js-data-table">
+            <thead>
+                <tr>
+                    <td>Page Title</td>
+                    <td class="">Page Description</td>
+                    <td>Author</td>
+                    <td>Page Modified</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pageDetail in Model.Pages)
+                {
                     <tr>
-                        <td>Page Title</td>
-                        <td>Page Description</td>
-                        <td>Author</td>
-                        <td>Page Modified</td>
-                        <td></td>
+                        <td>
+                            @pageDetail.PageTitle
+                        </td>
+                        <td>
+                            @pageDetail.PageDescription
+                        </td>
+                        <td>
+                            @pageDetail.AuthorUsername
+                        </td>
+                        <td>
+                            @pageDetail.ModifiedDate.ToShortDateString()
+                        </td>
+                        <td>
+                            <a asp-controller="PageManagement" asp-action="Detail" asp-route-id="@pageDetail.PageId">Edit</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach(var pageDetail in Model.Pages)
-                    {
-                        <tr>
-                            <td>
-                                @pageDetail.PageTitle
-                            </td>
-                            <td>
-                                @pageDetail.PageDescription
-                            </td>
-                            <td>
-                                @pageDetail.AutherUsername
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -50,10 +54,10 @@
                         { title: 'Page Title', field: 'pageTitle', type: 'string' },
                         { title: 'Page Description', field: 'pageDescription', type: 'string' },
                         { title: 'Author Username', field: 'authorUsername', type: 'string' },
-                        { title: 'Page Last Modified', field: 'modifiedDate', type: 'string'}
+                        { title: 'Page Last Modified', field: 'modifiedDate', type: 'string' }
                     ],
                     items: [
-                        
+
                     ]
 
                 },
@@ -83,6 +87,6 @@
 
             });
         });
-        
+
     </script>
 }
