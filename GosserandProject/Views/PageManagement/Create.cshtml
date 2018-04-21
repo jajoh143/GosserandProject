@@ -1,0 +1,57 @@
+﻿@model GosserandProject.Models.ViewModels.Admin.PageManagement.PageManagementCreateViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<main id="app" class="mdl-layout__content">
+    <h3>Detail</h3>
+    <hr />
+    <div class="mdl-grid" style="max-width:100%;min-width:850px;">
+        <div class="mdl-cell mdl-cell--12-col">
+            <form asp-action="Detail" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mdl-grid" style="max-width:100%;padding:15px;">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h3>Page Information</h3>
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" asp-for="Page.PageTitle" />
+                        <label class="mdl-textfield__label" asp-for="Page.PageTitle"></label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" asp-for="Page.PageDescription" />
+                        <label class="mdl-textfield__label" asp-for="Page.PageDescription"></label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h3>Page Editing</h3>
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                        <textarea class="mdl-textfield__input" type="text" rows="3" asp-for="Page.PageBodyHtml"></textarea>
+                        <label class="mdl-textfield__label" asp-for="Page.PageBodyHtml"></label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h3>Page Styling</h3>
+                    </div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                        <textarea class="mdl-textfield__input" asp-for="Page.PageHeadStyle"></textarea>
+                        <label class="mdl-textfield__label" asp-for="Page.PageHeadStyle"></label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <button class="mdl-button mdl-js-button mdl-color--blue-900 mdl-color-text--white"
+                                type="submit">
+                            Save
+                        </button>
+                        <a class="mdl-button mdl-js-button mdl-color--red mdl-color-text--white"
+                           href="/PageManagement">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+

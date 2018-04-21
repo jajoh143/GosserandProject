@@ -1,0 +1,11 @@
+﻿@model GosserandProject.ViewModels.FrontEnd.IndexPageViewModel
+@{
+    Layout = "_FrontEndLayout";
+    ViewData["Title"] = Model.IndexPageDisplay.PageTitle;
+}
+
+@Html.Raw(Model.IndexPageDisplay.PageHeadStyle)
+
+<div id="app">
+    @Html.Raw(Model.IndexPageDisplay.PageBodyHtml)
+</div>

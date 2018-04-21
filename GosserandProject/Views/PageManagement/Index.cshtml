@@ -1,32 +1,45 @@
-﻿@model GosserandProject.Web.Models.Page.PageManagementViewModel
+﻿@model GosserandProject.Models.ViewModels.Admin.PageManagement.PageManagementViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div id="app">
-    <div class="mdl-container">
-        <div class="mdl-layout">
-            <table class="mdl-data-table mdl-js-data-table">
-                <thead>
+<div class="mdl-grid" style="max-width:98%;">
+    <div class="mdl-cell mdl-cell--10-col">
+        <table class="mdl-data-table mdl-js-data-table">
+            <thead>
+                <tr>
+                    <td>Page Title</td>
+                    <td class="">Page Description</td>
+                    <td>Author</td>
+                    <td>Page Modified</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var pageDetail in Model.Pages)
+                {
                     <tr>
-                        <th v-for="(column, index) in columns"
-                            :key="index"
-                            :class="{'mdl-data-table__cell--non_numeric' : isString(column)}">
-                            {{ column.title}}
-                        </th>
+                        <td>
+                            @pageDetail.PageTitle
+                        </td>
+                        <td>
+                            @pageDetail.PageDescription
+                        </td>
+                        <td>
+                            @pageDetail.AuthorUsername
+                        </td>
+                        <td>
+                            @pageDetail.ModifiedDate.ToShortDateString()
+                        </td>
+                        <td>
+                            <a asp-controller="PageManagement" asp-action="Detail" asp-route-id="@pageDetail.PageId">Edit</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                   <tr v-for="(row, index) in items">
-                       <td v-for="(column, index) in columns">
-                           {{ row[column.field]}}
-                       </td>
-                   </tr>
-                </tbody>
-            </table>
-        </div>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -38,12 +51,13 @@
                 data: {
                     test: "Hello World!",
                     columns: [
-                        { title: 'Page Title', field: 'PageTitle', type: 'string' },
-                        { title: 'Page Description', field: 'PageDecription', type: 'string' },
-                        { title: 'Author Username', field: 'AuthorUsername', type: 'string' }
+                        { title: 'Page Title', field: 'pageTitle', type: 'string' },
+                        { title: 'Page Description', field: 'pageDescription', type: 'string' },
+                        { title: 'Author Username', field: 'authorUsername', type: 'string' },
+                        { title: 'Page Last Modified', field: 'modifiedDate', type: 'string' }
                     ],
                     items: [
-                        
+
                     ]
 
                 },
@@ -67,12 +81,12 @@
                     }
                 },
                 mounted() {
-
+                    this.getRowData();
 
                 }
 
             });
         });
-        
+
     </script>
 }
