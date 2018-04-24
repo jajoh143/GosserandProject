@@ -5,24 +5,4 @@
 		Layout = "~/Views/Shared/_Layout.cshtml";
 
 
-<div>
-	<v-data-table :headers="headers"
-				  :items="items"
-				  :search="search"
-				  :pagination.sync="pagination"
-				  class="elevation-1">
-		<template slot="items" slot-scope="props">
-			<td>{{ props.item.name }}</td>
-			<td class="text-xs-right">{{ props.item.FirstName }}</td>
-			<td class="text-xs-right">{{ props.item.LastName }}</td>
-			<td class="text-xs-right">{{ props.item.PhoneNumber}}</td>
-			<td class="text-xs-right">{{ props.item.Position }}</td>
-			<td class="text-xs-right">{{ props.item.Email }}</td>
-		</template>
-	</v-data-table>
-	<div class="text-xs-center pt-2">
-		<v-btn color="primary" @click.native="toggleOrder">Toggle sort order</v-btn>
-		<v-btn color="primary" @click.native="nextSort">Sort next column</v-btn>
-	</div>
-</div>
 
