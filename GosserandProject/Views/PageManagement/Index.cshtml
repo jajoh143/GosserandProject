@@ -4,44 +4,54 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-<div class="mdl-grid" style="max-width:98%;">
-    <div class="mdl-cell mdl-cell--10-col">
-        <table class="mdl-data-table mdl-js-data-table">
-            <thead>
-                <tr>
-                    <td>Page Title</td>
-                    <td class="">Page Description</td>
-                    <td>Author</td>
-                    <td>Page Modified</td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var pageDetail in Model.Pages)
+<div class="mdl-layout mdl-js-layout">
+    <div class="mdl-grid" style="max-width:98%;">
+        <div class="mdl-cell mdl-cell--6-col"></div>
+        <div class="mdl-cell mdl-cell--2-col">
+            <a asp-controller="PageManagement" asp-action="Create" class="mdl-button mdl-button-js">
+                Add new Page
+            </a>
+        </div>
+        <div class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet">
+            <div class="table-responsive">
+                <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <td>Page Title</td>
+                            <td class="">Page Description</td>
+                            <td>Author</td>
+                            <td>Page Modified</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var pageDetail in Model.Pages)
                 {
-                    <tr>
-                        <td>
-                            @pageDetail.PageTitle
-                        </td>
-                        <td>
-                            @pageDetail.PageDescription
-                        </td>
-                        <td>
-                            @pageDetail.AuthorUsername
-                        </td>
-                        <td>
-                            @pageDetail.ModifiedDate.ToShortDateString()
-                        </td>
-                        <td>
-                            <a asp-controller="PageManagement" asp-action="Detail" asp-route-id="@pageDetail.PageId">Edit</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                <tr>
+                    <td>
+                        @pageDetail.PageTitle
+                    </td>
+                    <td>
+                        @(pageDetail.PageDescription.Substring(0, 20) + "...")
+                    </td>
+                    <td>
+                        @pageDetail.AuthorUsername
+                    </td>
+                    <td>
+                        @pageDetail.ModifiedDate.ToShortDateString()
+                    </td>
+                    <td>
+                        <a asp-controller="PageManagement" asp-action="Edit" asp-route-id="@pageDetail.PageId">Edit</a>
+                    </td>
+                </tr>
+}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
 
 @section scripts {
     <script type="text/javascript">

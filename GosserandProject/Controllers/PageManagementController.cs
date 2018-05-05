@@ -26,30 +26,19 @@ namespace GosserandProject.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Detail(int Id)
+        public IActionResult Edit(int Id)
         {
             var model = new PageManagementDetailViewModel(_configuration.GetConnectionString("DefaultConnection"), Id);
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Detail([FromForm]PageManagementDetailViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                ModifyPageData.UpdatePage(_configuration.GetConnectionString("DefaultConnection"), model.Page);
-                return View(model);
-            }
-            else
-            {
-                return View(model);
-            }
-        }
-
+       
         public IActionResult Create()
         {
             var model = new PageManagementCreateViewModel();
             return View(model);
         }
+
+       
     }
 }

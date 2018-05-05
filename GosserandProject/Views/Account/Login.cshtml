@@ -18,8 +18,8 @@
                     <h2 class="mdl-card__title-text">Login</h2>
                 </div>
                 <div class="mdl-cell mdl-cell--12-col">
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <input id="login_email" asp-for="Email" class="mdl-textfield__input" />
+                    <div class="mdl-textfield mdl-js-textfield" v-bind:class="{isDirty : email.length > 0}">
+                        <input id="login_email" asp-for="Email" v-model="email" class="mdl-textfield__input" />
                         <label for="login_email" asp-for="Email" class="mdl-textfield__label"></label>
                         <span asp-validation-for="Email" class="text-danger mdl-textfield_error"></span>
                     </div>
@@ -57,6 +57,19 @@
     </div>
     <div class="mdl-layout-spacer"></div>
 </div>
+
+@section scripts {
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app",
+            data: {
+                email: "",
+                password: "",
+                test: "test"
+            }
+        })
+    </script>
+}
 
 
 

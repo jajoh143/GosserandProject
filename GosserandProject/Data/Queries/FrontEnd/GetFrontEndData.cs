@@ -37,5 +37,30 @@ namespace GosserandProject.Data.Queries.FrontEnd
 
             }
         }
+
+        public static IEnumerable<PageLinkDTO> GetPageLinks(string connectionString)
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var query = @"
+                  select
+                        Id PageId,
+	                    PageTitle,
+	                    PageLink,
+	                    PageParentId
+                    from
+	                    pages
+                    where PagePublished = 1;";
+                try
+                {
+                    return db.Query<PageLinkDTO>(query);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+        }
     }
 }

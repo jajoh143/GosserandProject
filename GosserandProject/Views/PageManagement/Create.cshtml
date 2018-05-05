@@ -1,57 +1,86 @@
 ﻿@model GosserandProject.Models.ViewModels.Admin.PageManagement.PageManagementCreateViewModel
-
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/css/vendor/codemirror.css")" />
+}
 
-
-<main id="app" class="mdl-layout__content">
-    <h3>Detail</h3>
-    <hr />
-    <div class="mdl-grid" style="max-width:100%;min-width:850px;">
+<main id="app" class="mdl-layout__content" style="padding:15px;">
+    <div class="mdl-grid" style="min-width:100%;">
+        <div class="mdl-cell  mdl-cell--8-col-tablet mdl-cell--12-col">
+            <h1>Create Page</h1>
+            <hr />
+        </div>
+        <div class="mdl-cell mdl-cell--6-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input id="PageTitle" class="mdl-textfield__input" v-model="page.pageTitle" />
+            <label class="mdl-textfield__label" for="PageTitle">Page Title</label>
+        </div>
+        <div class="mdl-cell mdl-cell--10-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input id="PageDescription" class="mdl-textfield__input" v-model="page.pageDescription" />
+            <label class="mdl-textfield__label" for="PageDescription">Page Description</label>
+        </div>
         <div class="mdl-cell mdl-cell--12-col">
-            <form asp-action="Detail" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="mdl-grid" style="max-width:100%;padding:15px;">
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <h3>Page Information</h3>
-                    </div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" asp-for="Page.PageTitle" />
-                        <label class="mdl-textfield__label" asp-for="Page.PageTitle"></label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" asp-for="Page.PageDescription" />
-                        <label class="mdl-textfield__label" asp-for="Page.PageDescription"></label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <h3>Page Editing</h3>
-                    </div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" type="text" rows="3" asp-for="Page.PageBodyHtml"></textarea>
-                        <label class="mdl-textfield__label" asp-for="Page.PageBodyHtml"></label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <h3>Page Styling</h3>
-                    </div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" asp-for="Page.PageHeadStyle"></textarea>
-                        <label class="mdl-textfield__label" asp-for="Page.PageHeadStyle"></label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--12-col">
-                        <button class="mdl-button mdl-js-button mdl-color--blue-900 mdl-color-text--white"
-                                type="submit">
-                            Save
-                        </button>
-                        <a class="mdl-button mdl-js-button mdl-color--red mdl-color-text--white"
-                           href="/PageManagement">
-                            Cancel
-                        </a>
-                    </div>
-                </div>
-            </form>
+            <h3>Page Editing</h3>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <codemirror v-model="page.pageBodyHtml" :options="htmlCodeEditorOptions"></codemirror>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <h3>Page Styling</h3>
+        </div>
+        <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+            <codemirror v-model="page.pageHeadStyle" :options="htmlCodeEditorOptions"></codemirror>
+        </div>
+        <div class="mdl-cell mdl-cell--12-col">
+            <button @@click="submitPageForm" class="mdl-button mdl-js-button mdl-color--blue-900 mdl-color-text--white">
+                Save
+            </button>
+            <a class="mdl-button mdl-js-button mdl-color--red mdl-color-text--white"
+               href="/PageManagement">
+                Cancel
+            </a>
         </div>
     </div>
 </main>
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/js/vendor/codemirror.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/javascript.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/css.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/htmlmixed.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/xml.js")"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.0/dist/vue-codemirror.js"></script>
+    <script type="text/javascript">
+
+        Vue.use(VueCodemirror)
+
+        new Vue({
+            el: "#app",
+            data: {
+                page: @(Json.Serialize(Model.Page)),
+                htmlCodeEditorOptions: {
+                    tabSize: 4,
+                    styleActiveLine: true,
+                    lineNumbers: true,
+                    mode: 'text/html'
+                }
+            },
+            components: {
+                LocalCodemirror: VueCodemirror.codemirror
+            },
+            methods: {
+                submitPageForm() {
+                    axios.post("/api/pagemanagement/createpage", this.page)
+                        .then(resp => {
+                            console.log(resp);
+                            alert(resp.data);
+                        });
+                }
+            }
+
+        })
+    </script>
+}
 

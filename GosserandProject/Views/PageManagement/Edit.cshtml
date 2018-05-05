@@ -1,0 +1,90 @@
+﻿@model GosserandProject.Models.ViewModels.Admin.PageManagement.PageManagementDetailViewModel
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section styles {
+    <link rel="stylesheet" href="@Url.Content("~/css/vendor/codemirror.css")" />
+}
+
+<main id="app" class="mdl-layout__content">
+    <h3>Detail</h3>
+    <hr />
+    <div class="mdl-grid" style="max-width:100%;min-width:850px;">
+        <div class="mdl-cell mdl-cell--12-col">
+            <div class="mdl-grid" style="max-width:100%;padding:15px;">
+                <div class="mdl-cell mdl-cell--12-col">
+                    <h3>Page Information</h3>
+                </div>
+                <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                    <input id="PageTitle" class="mdl-textfield__input" v-model="page.pageTitle" />
+                    <label class="mdl-textfield__label" for="PageTitle"></label>
+                </div>
+                <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                    <input id="PageDescription" class="mdl-textfield__input" v-model="page.pageDescription" />
+                    <label class="mdl-textfield__label" for="PageDescription"></label>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <h3>Page Editing</h3>
+                </div>
+                <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                    <codemirror v-model="page.pageBodyHtml" :options="htmlCodeEditorOptions"></codemirror>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <h3>Page Styling</h3>
+                </div>
+                <div class="mdl-cell mdl-cell--8-col mdl-textfield mdl-js-textfield">
+                    <codemirror v-model="page.pageHeadStyle" :options="htmlCodeEditorOptions"></codemirror>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <button @@click="submitPageForm" class="mdl-button mdl-js-button mdl-color--blue-900 mdl-color-text--white">
+                        Save
+                    </button>
+                    <a class="mdl-button mdl-js-button mdl-color--red mdl-color-text--white"
+                       href="/PageManagement">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+</main>
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/js/vendor/codemirror.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/javascript.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/css.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/htmlmixed.js")"></script>
+    <script src="@Url.Content("~/js/vendor/modes/xml.js")"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-codemirror@4.0.0/dist/vue-codemirror.js"></script>
+    <script type="text/javascript">
+
+        Vue.use(VueCodemirror)
+
+        new Vue({
+            el: "#app",
+            data: {
+                page: @(Json.Serialize(Model.Page)),
+                htmlCodeEditorOptions: {
+                    tabSize: 4,
+                    styleActiveLine: true,
+                    lineNumbers: true,
+                    mode: 'text/html'
+                }
+            },
+            components: {
+                LocalCodemirror: VueCodemirror.codemirror
+            },
+            methods: {
+                submitPageForm() {
+                    axios.post("/api/pagemanagement/updatepage", this.page)
+                        .then(resp => {
+                            console.log(resp);
+                            alert(resp.data);
+                        });
+                }
+            }
+
+        })
+    </script>
+}
+

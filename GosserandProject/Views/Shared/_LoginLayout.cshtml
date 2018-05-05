@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="@Url.Content("~/css/site.css")" />
 </head>
 <body>
-    <div class="login_layout">
+    <div id="app" class="login_layout">
         @RenderBody()
     </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

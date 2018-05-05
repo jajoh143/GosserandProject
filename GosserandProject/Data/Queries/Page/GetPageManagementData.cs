@@ -48,6 +48,7 @@ namespace GossserandProject.Data.Queries.Page
             {
                 var query = @"
                         select 
+                            p.Id PageId,
                             p.PageTitle,
                             p.PageDescription,
                             p.PageLink,

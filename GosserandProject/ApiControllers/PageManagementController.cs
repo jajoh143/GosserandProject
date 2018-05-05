@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GosserandProject.Data.Commands.Admin;
+using GosserandProject.Data.DTO.Admin;
 using GossserandProject.Data.Queries.Page;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,18 @@ namespace GosserandProject.Api.Controllers.Page
         public IActionResult GetPages()
         {
             return Ok(GetPageManagementData.GetPagesData(_configuration.GetConnectionString("DefaultConnection")));
+        }
+
+        [HttpPost]
+        public IActionResult UpdatePage([FromBody]PageDetailDTO page)
+        {
+            return Ok(ModifyPageManagementData.UpdatePage(_configuration.GetConnectionString("DefaultConnection"), page));
+        }
+
+        [HttpPost]
+        public IActionResult CreatePage([FromBody]PageDetailDTO page)
+        {
+            return Ok(ModifyPageManagementData.CreatePage(_configuration.GetConnectionString("DefaultConnection"), page));
         }
     }
 }
