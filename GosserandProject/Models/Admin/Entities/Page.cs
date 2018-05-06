@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GossserandProject.Data.Models
 {
-    public class Page : Entity
+    public class Page
     {
         public string PageTitle { get; set; }
         public string PageDescription { get; set; }

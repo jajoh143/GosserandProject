@@ -1,10 +1,12 @@
-﻿using System;
+﻿using GossserandProject.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GossserandProject.Data.Models.Entities
+namespace GossserandProject.Data.Models.User
+	
 {
-    public class User : Entity
+    public class User 
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
