@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GosserandProject.Data.DTO.UserInfo
 
 {
-	public class UserInfoDetailDTO : UserInfo
+	public class UserInfoDetailDTO : UserInfoDTO
 	{
 
 	}

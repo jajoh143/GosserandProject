@@ -1,95 +1,52 @@
-﻿
+﻿@model GosserandProject.Models.ViewModels.UserManagement.UserManagementViewModel
+
 @{
-	ViewData["Title"] = "View";
-	Layout = "_AdminLayout";
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>User</h2>
+
+<h2>Users</h2>
 
 <div class="mdl-grid" style="max-width:98%;">
 	<div class="mdl-cell mdl-cell--10-col">
 		<table class="mdl-data-table mdl-js-data-table">
 			<thead>
 				<tr>
-					<td>First Name</td>
 					<td>Last Name</td>
+					<td>First Name</td>
 					<td>Email</td>
 					<td>Phone Number</td>
 					<td>Postion</td>
-					<td class="">User Description</td>
-					<td></td>
 				</tr>
 			</thead>
 			<tbody>
-				@*@foreach (var userDetail in Model.User)
+				@foreach (var user in Model.Users)
 						{
 							<tr>
 								<td>
-									@pageDetail.PageTitle
+									@user.LastName
 								</td>
 								<td>
-									@pageDetail.PageDescription
+									@user.FirstName
 								</td>
 								<td>
-									@pageDetail.AuthorUsername
+									@user.Email
 								</td>
 								<td>
-									@pageDetail.ModifiedDate.ToShortDateString()
+									@user.PhoneNumber
 								</td>
 								<td>
-									<a asp-controller="PageManagement" asp-action="Detail" asp-route-id="@pageDetail.PageId">Edit</a>
+									@user.Position
+								</td>
+								<td>
+									<a asp-controller="UserManagement" asp-action="Edit" asp-route-id="@user.UserId">Edit</a>
 								</td>
 							</tr>
 						}
-					</tbody>*@
-		</table>
-	</div>
-</div>
+						</tbody>
+				</table>
+			</div>
+		</div>
 
-@section scripts {
-	<script type="text/javascript">
-		document.addEventListener("DOMContentLoaded", function (event) {
-			new Vue({
-				el: '#app',
-				data: {
-					test: "Hello World!",
-					columns: [
-						{ title: 'Page Title', field: 'pageTitle', type: 'string' },
-						{ title: 'Page Description', field: 'pageDescription', type: 'string' },
-						{ title: 'Author Username', field: 'authorUsername', type: 'string' },
-						{ title: 'Page Last Modified', field: 'modifiedDate', type: 'string' }
-					],
-					items: [
-
-					]
-
-				},
-				computed: {
-
-
-				},
-				methods: {
-					isString(val) {
-						return typeof (val) == 'string';
-					},
-					getRowData() {
-						axios.get("/api/pagemanagement/getpages").then(resp => {
-
-							console.log(resp);
-							if (resp.status == 200)
-								this.items = resp.data;
-
-						});
-
-					}
-				},
-				mounted() {
-					this.getRowData();
-
-				}
-
-			});
-		});
-
-	</script>
-}
+		

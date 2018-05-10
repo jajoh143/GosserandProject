@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using GosserandProject.Data.DTO.UserInfo;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,25 +15,22 @@ namespace GossserandProject.Data.Queries.Page
 	public class UserManagementData
 	{
 
-		public static IEnumerable<UserInfo> GetPagesData(string connString)
+		public static IEnumerable<UserInfoDTO> UserData(string connString)
 		{
 			using (IDbConnection db = new SqlConnection(connString))
 			{
 				var query = @"
                           select 
-						p.Id PageId,
-                        PageTitle,
-                        PageDescription,
-                        PageLink,
-                        PagePublished,
-                        IsIndex,
-                        u.Username as AuthorUsername,
-						p.ModifiedDate
-                        from pages p
-                        inner join AspNetUsers u on p.AuthorId = u.ID";
+						UserId,
+                        LastName,
+                        PhoneNumber,
+                        Email,
+                        Position,
+                        IsIndex";
+                                                
 				try
 				{
-					return db.Query<UserInfo>(query);
+					return db.Query<UserInfoDTO>(query);
 				}
 				catch (Exception e)
 				{
@@ -41,32 +39,25 @@ namespace GossserandProject.Data.Queries.Page
 
 			}
 		}
+		
+	public static UserInfoDTO UserInfoDetail(string connString, int id)
 
-		public static UserInfoDetailDTO GetPageDetail(string connString, int id)
 		{
 			using (IDbConnection db = new SqlConnection(connString))
 			{
-				var query = @"
-                        select 
-                            p.PageTitle,
-                            p.PageDescription,
-                            p.PageLink,
-                            p.PagePublished,
-                            pd.PageBodyHtml,
-                            pd.PageHeadStyle,
-                            anu.UserName AuthorUsername,
-                            anu.FirstName AuthorFirstName,
-                            anu.LastName AuthorLastName
-                        from pages p
-                        left outer join AspNetUsers anu on p.AuthorID = anu.ID
-                        left outer join page_display pd on p.id = pd.PageId
-                        where p.Id = @PageId";
-
+				var query = @"select
+							UserId,
+							LastName,
+							PhoneNumber,
+							Email,
+							Postion,
+							IsIndex
+							from UserInfo";
 				try
 				{
 					return db.QueryFirstOrDefault<UserInfoDetailDTO>(query, new
 					{
-						PageId = id
+						UserId = id
 					});
 				}
 				catch (Exception e)

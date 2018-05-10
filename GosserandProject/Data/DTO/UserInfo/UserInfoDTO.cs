@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace GosserandProject.Data.DTO.UserInfo
 {
-    public class UserInfo
-    {
+	public class UserInfoDTO
+	{
 
-		//public int UserId { get; set; }
-		//[Display(Name = "UserName")]
-		//public string FirstName{ get; set; }
-		//[Display(Name = "First Name")]
-		//public string LastName{ get; set; }
-		//[Display(Name = "Email")]
-		//public string Role { get; set; }
-		//[Display(Name = "Position")]
-		//public string PageDescription { get; set; }
-		//public string AuthorFirstName { get; set; }
-		//public string AuthorLastName { get; set; }
-		//public string AuthorUsername { get; set; }
+		public Guid UserId { get; set; }
+		[Display(Name = "Last Name")]
+		public string LastName { get; set; }
+		[Display(Name = "First Name")]
+		public string FirstName { get; set; }
+		[Display(Name = "E-mail")]
+		public string Email { get; set; }
+		[Display(Name = " Phone Number ")]
+		public int PhoneNumber { get; set; }
+		[Display(Name = "Position")]
+		public string Position { get; set; }
 		
-		}
+
+	}	
+	
 }
