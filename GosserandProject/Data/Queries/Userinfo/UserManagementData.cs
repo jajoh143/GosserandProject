@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using GosserandProject.Data.DTO.UserInfo;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +9,7 @@ using System.Data.SqlClient;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GossserandProject.Data.Queries.Page
+namespace GossserandProject.Data.Queries.Userinfo
 {
 	public class UserManagementData
 	{

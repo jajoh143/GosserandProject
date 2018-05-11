@@ -20,6 +20,12 @@ namespace GosserandProject.Data.DTO.UserInfo
 		public int PhoneNumber { get; set; }
 		[Display(Name = "Position")]
 		public string Position { get; set; }
+		public string AuthorFirstName { get; set; }
+		public string AuthorLastName { get; set; }
+		public string AuthorUsername { get; set; }
+		public string AuthorPhoneNumber { get; set; }
+		public string AuthorEmail { get; set; }
+		public string AuthorPosition{ get; set; }
 		
 
 	}	

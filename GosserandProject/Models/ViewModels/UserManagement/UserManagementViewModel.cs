@@ -1,5 +1,5 @@
 ﻿using GosserandProject.Data.DTO.UserInfo;
-using GossserandProject.Data.Queries.Page;
+using GossserandProject.Data.Queries.Userinfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
