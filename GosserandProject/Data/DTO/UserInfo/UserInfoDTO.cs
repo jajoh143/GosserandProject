@@ -9,7 +9,7 @@ namespace GosserandProject.Data.DTO.UserInfo
 	public class UserInfoDTO
 	{
 
-		public Guid UserId { get; set; }
+		public string UserId { get; set; }
 		[Display(Name = "Last Name")]
 		public string LastName { get; set; }
 		[Display(Name = "First Name")]
@@ -17,7 +17,7 @@ namespace GosserandProject.Data.DTO.UserInfo
 		[Display(Name = "E-mail")]
 		public string Email { get; set; }
 		[Display(Name = " Phone Number ")]
-		public int PhoneNumber { get; set; }
+		public string PhoneNumber { get; set; }
 		[Display(Name = "Position")]
 		public string Position { get; set; }
 		public string AuthorFirstName { get; set; }

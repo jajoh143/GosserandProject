@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace GosserandProject.Models.ViewModels.UserManagement
 {
-    public class UserManagementViewModel
-    {
-		public IEnumerable<UserInfoDTO> Users { get; set; }
+	public class UserManagementDetailViewModel
+	{
+		public UserInfoDetailDTO User { get; set; }
 
-		public UserManagementViewModel(string connectionString)
+		public UserManagementDetailViewModel(string connString, Guid userGuid)
 		{
-			Users = GetUserManagementData.UserData(connectionString);
+			User = GetUserManagementData.UserInfoDetail(connString, userGuid);
 		}
-
 	}
 }
 
