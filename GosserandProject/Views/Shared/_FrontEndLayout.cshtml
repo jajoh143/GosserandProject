@@ -17,7 +17,7 @@
                 <nav class="mdl-navigation">
                     @foreach(var link in Model.Links.Where(x => !x.PageParentId.HasValue))
                     {
-                        <a class="mdl-navigation__link" href="@link.PageLink">@link.PageTitle</a>
+                        <a class="mdl-navigation__link" href="/Link/@link.PageLink">@link.PageTitle</a>
                     }
                 </nav>
             </div>

@@ -62,5 +62,33 @@ namespace GosserandProject.Data.Queries.FrontEnd
 
             }
         }
+
+        public static PageDisplayDTO GetStaticPage(string connString, string routeName)
+        {
+            using (IDbConnection db = new SqlConnection(connString))
+            {
+                var query = @"
+                   select
+                    PageTitle,
+                    PageDescription,
+                    PageLink,
+                    PageBodyHtml,
+                    PageHeadStyle
+                    from 
+	                    pages p
+                    inner join page_display pd on p.ID = pd.PageId
+                    where PageLink = @PageId;";
+
+                try
+                {
+                    return db.QuerySingleOrDefault<PageDisplayDTO>(query, 
+                        new { PageLink = routeName });
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
     }
 }
