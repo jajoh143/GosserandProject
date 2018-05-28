@@ -50,7 +50,7 @@ namespace GossserandProject.Data.Queries.Userinfo
 							LastName,
 							PhoneNumber,
 							Email,
-							Position,
+							Position
 							from AspNetUsers
 							where
 							id = @UserId; "; 
