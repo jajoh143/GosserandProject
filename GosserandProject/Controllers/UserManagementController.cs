@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using GosserandProject.Data.Commands;
 using GosserandProject.Data.DTO.UserInfo;
 using GosserandProject.Models.ViewModels.UserManagement;
-using GossserandProject.Data.Models.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -32,7 +31,19 @@ namespace GosserandProject.Web.Controllers
 			return View(model);
 		}
 
-		
+		[HttpPost]
+		public IActionResult Detail([FromForm]UserManagementDetailViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				ModifyUserData.UpdatePage(_configuration.GetConnectionString("DefaultConnection"), model.User);
+				return View(model);
+			}
+			else
+			{
+				return View(model);
+			}
+		}
 	}
 
 
