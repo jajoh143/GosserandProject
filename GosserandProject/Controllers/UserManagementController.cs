@@ -36,7 +36,7 @@ namespace GosserandProject.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				ModifyUserData.UpdatePage(_configuration.GetConnectionString("DefaultConnection"), model.User);
+				ModifyUserData.UpdateUser(_configuration.GetConnectionString("DefaultConnection"), model.User);
 				return View(model);
 			}
 			else
@@ -46,5 +46,5 @@ namespace GosserandProject.Web.Controllers
 		}
 	}
 
-
 }
+

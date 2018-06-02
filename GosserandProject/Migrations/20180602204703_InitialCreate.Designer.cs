@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace GosserandProject.Data.Migrations
+namespace GosserandProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180511013416_Position")]
-    partial class Position
+    [Migration("20180602204703_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
