@@ -1,0 +1,47 @@
+﻿@model GosserandProject.Models.ViewModels.UserManagement.UserManagementDetailViewModel
+@{
+	ViewData["Title"] = "Details";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section styles {
+	<link rel="stylesheet" href="@Url.Content("~/css/vendor/codemirror.css")" />
+}
+
+<main id="app" class="mdl-layout__content">
+	<h3>User.FirstName User.LastName</h3>
+	<hr />
+	<div class="mdl-grid" style="max-width:100%;min-width:850px;">
+		<div class="mdl-cell mdl-cell--12-col">
+			<form asp-action="Detail" method="post">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<div class="mdl-grid" style="max-width:100%;padding:15px;"></div>
+
+				<div class="form-group">
+					<label asp-for="User.FirstName" class="control-label"> First Name</label>
+				</div>
+				<div class="form-group">
+					<label asp-for="User.LastName" class="control-label">Last Name</label>
+
+				</div>
+				<div class="form-group">
+					<label asp-for="User.Email" class="control-label">Email</label>
+
+				</div>
+				<div class="form-group">
+					<label asp-for="User.PhoneNumber" class="control-label">Phone Number</label>
+
+				</div>
+				<div class="form-group">
+					<label asp-for="User.Position" class="control-label">Position</label>
+
+				</div>
+				<div>
+					<a class="mdl-button mdl-js-button mdl-color--red mdl-color-text--white"
+					   href="/UserManagement">
+						Close
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</main>
